@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">alura-orgs</string>
+    <string name="value">Valor</string>
+    <string name="description">Descrição</string>
+    <string name="title">Título</string>
+    <string name="save">Salvar</string>
+</resources>
