@@ -1,26 +1,30 @@
 package com.example.alura_orgs.ui.activity
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
-import com.example.alura_orgs.R
+import androidx.appcompat.app.AppCompatActivity
 import com.example.alura_orgs.dao.ProductsDao
+import com.example.alura_orgs.databinding.ActivityProductFormBinding
+import com.example.alura_orgs.databinding.ActivityProductFormBinding.inflate
 import com.example.alura_orgs.model.Products
 import java.math.BigDecimal
 
 class ProductFormActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityProductFormBinding
     private val dao = ProductsDao()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_product_form)
+        binding = inflate(layoutInflater)
+        val view = binding.productFormRoot
+        setContentView(view)
 
-        val inputTitle = findViewById<EditText>(R.id.inputTitle)
-        val inputDescription = findViewById<EditText>(R.id.inputDescription)
-        val inputValue = findViewById<EditText>(R.id.inputValue)
-        val buttonSave = findViewById<Button>(R.id.buttonSave)
+        val inputTitle = binding.inputTitle
+        val inputDescription = binding.inputDescription
+        val inputValue = binding.inputValue
+        val buttonSave = binding.buttonSave
 
         configureButtonSave(buttonSave, inputTitle, inputDescription, inputValue)
     }
