@@ -7,19 +7,23 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.alura_orgs.dao.ProductsDao
 import com.example.alura_orgs.databinding.ActivityProductFormBinding
 import com.example.alura_orgs.databinding.ActivityProductFormBinding.inflate
+import com.example.alura_orgs.extensions.uploadImage
 import com.example.alura_orgs.model.Products
+import com.example.alura_orgs.ui.dialog.FormDialog
 import java.math.BigDecimal
 
 class ProductFormActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityProductFormBinding
     private val dao = ProductsDao()
+    private var url: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = inflate(layoutInflater)
         val view = binding.productFormRoot
         setContentView(view)
+        title = "Cadastrar produto"
 
         val inputTitle = binding.inputTitle
         val inputDescription = binding.inputDescription
@@ -27,6 +31,12 @@ class ProductFormActivity : AppCompatActivity() {
         val buttonSave = binding.buttonSave
 
         configureButtonSave(buttonSave, inputTitle, inputDescription, inputValue)
+        binding.productImage.setOnClickListener {
+            FormDialog(this).showDialog(url) { image ->
+                url = image
+                binding.productImage.uploadImage(url)
+            }
+        }
     }
 
     private fun configureButtonSave(
@@ -45,7 +55,8 @@ class ProductFormActivity : AppCompatActivity() {
             val newProduct = Products(
                 title = title,
                 description = description,
-                value = valueConverted
+                value = valueConverted,
+                image = url
             )
 
             dao.add(newProduct)

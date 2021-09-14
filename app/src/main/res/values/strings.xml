@@ -4,4 +4,7 @@
     <string name="description">Descrição</string>
     <string name="title">Título</string>
     <string name="save">Salvar</string>
+    <string name="new_product">Novo produto</string>
+    <string name="refresh">Recarregar</string>
+    <string name="url">URL</string>
 </resources>
